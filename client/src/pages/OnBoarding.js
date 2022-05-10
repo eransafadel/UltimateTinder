@@ -1,71 +1,63 @@
 import Nav from "../components/Nav";
 import InputField from "../components/InputField";
-import {useState} from 'react';
-import  './OnBoarding.css'
-
+import { useState } from "react";
+import "./OnBoarding.css";
 
 const OnBoarding = () => {
+  const [formData, setFormData] = useState({
+    user_id: "",
+    first_name: "",
+    dob_day: "",
+    dob_month: "",
+    dob_year: "",
+    show_gender: false,
+    gender_identity: "man",
+    gender_interest: "woman",
+    email: "",
+    url: "",
+    about: "",
+    matches: [],
+  });
 
-const [formData,setFormData] = useState({
-      user_id:'',
-      first_name:'',
-      dob_day:'',
-      dob_month:'',
-      dob_year:'',
-      show_gender:false,
-      gender_identity:'man',
-      gender_interest:'woman',
-      email:'',
-      url:'',
-      about:'',
-      matches:[]
-});
-
-
-console.log(formData);
+  console.log(formData);
 
   const handleChange = (e) => {
-    
-    const value = e.target.value==='checkbox' ? e.target.checked : e.target.value;
+    const value =
+      e.target.value === "checkbox" ? e.target.checked : e.target.value;
     const name = e.target.name;
-    console.log('value'+value,'name'+name);
+    console.log("value" + value, "name" + name);
 
-    setFormData((prevState)=>({
+    setFormData((prevState) => ({
       ...prevState,
-      [name] : value
+      [name]: value,
     }));
   };
   const handleSubmit = () => {
     console.log("submit!");
   };
-  
 
   return (
     <>
       <Nav minimal={true} setShowModal={() => {}} showModal={false} />
       <div className="onboarding">
         <h2>CREATE ACCOUNT</h2>
-        <form
-         onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <section>
             <label htmlFor="first_name">First Name</label>
 
-
-
-           <input
-                id="first_name"
-                type="text"
-                name="first_name"
-                placeholder="First Name"
-                required={true}
-                value={formData.first_name}
-                onChange={handleChange}
-              /> 
-         
+            <input
+              id="first_name"
+              type="text"
+              name="first_name"
+              placeholder="First Name"
+              required={true}
+              value={formData.first_name}
+              onChange={handleChange}
+            />
 
             <label>Birthday</label>
             <div className="multiple-input-container">
-            <input
+              <input
                 id="dob_day"
                 type="number"
                 name="dob_day"
@@ -73,9 +65,9 @@ console.log(formData);
                 required={true}
                 value={formData.dob_day}
                 onChange={handleChange}
-              /> 
-            
-            <input
+              />
+
+              <input
                 id="dob_month"
                 type="number"
                 name="dob_month"
@@ -83,9 +75,9 @@ console.log(formData);
                 required={true}
                 value={formData.dob_month}
                 onChange={handleChange}
-              /> 
-           
-           <input
+              />
+
+              <input
                 id="dob_year"
                 type="number"
                 name="dob_year"
@@ -93,8 +85,7 @@ console.log(formData);
                 required={true}
                 value={formData.dob_year}
                 onChange={handleChange}
-              /> 
-         
+              />
             </div>
 
             <label>Gender</label>
@@ -105,7 +96,7 @@ console.log(formData);
                 name="gender_identity"
                 value="man"
                 onChange={handleChange}
-                checked={formData.gender_identity==='man'}
+                checked={formData.gender_identity === "man"}
               />
               <label htmlFor="man-gender-identity">Man</label>
 
@@ -115,7 +106,7 @@ console.log(formData);
                 name="gender_identity"
                 value="woman"
                 onChange={handleChange}
-                checked={formData.gender_identity==='woman'}
+                checked={formData.gender_identity === "woman"}
               />
               <label htmlFor="woman-gender-identity">Woman</label>
 
@@ -125,7 +116,7 @@ console.log(formData);
                 name="gender_identity"
                 value="more"
                 onChange={handleChange}
-                checked={formData.gender_identity==='more'}
+                checked={formData.gender_identity === "more"}
               />
               <label htmlFor="more-gender-identity">More</label>
             </div>
@@ -146,7 +137,7 @@ console.log(formData);
                 name="gender_interest"
                 value="man"
                 onChange={handleChange}
-                checked={formData.gender_interest==='man'}
+                checked={formData.gender_interest === "man"}
               />
 
               <label htmlFor="man-gender-interest">Man</label>
@@ -157,7 +148,7 @@ console.log(formData);
                 name="gender_interest"
                 value="woman"
                 onChange={handleChange}
-                checked={formData.gender_interest==='woman'}
+                checked={formData.gender_interest === "woman"}
               />
               <label htmlFor="woman-gender-interest">Woman</label>
 
@@ -167,7 +158,7 @@ console.log(formData);
                 name="gender_interest"
                 value="everyone"
                 onChange={handleChange}
-                checked={formData.gender_interest==='everyone'}
+                checked={formData.gender_interest === "everyone"}
               />
               <label htmlFor="everyone-gender-interest">Everyone</label>
             </div>
@@ -181,9 +172,9 @@ console.log(formData);
               placeholder="I like long walks.."
               value={formData.about}
               onChange={handleChange}
-              checked={formData.gender_interest==='everyone'}
+              checked={formData.gender_interest === "everyone"}
             />
-            <input  type="submit" />   
+            <input type="submit" />
           </section>
 
           <section>
@@ -198,7 +189,7 @@ console.log(formData);
               required={true}
             />
             <div className="photo-container">
-            <img src={formData.url} alt="profile pic preview" />
+             {formData.url && <img src={formData.url} alt="profile pic preview" />}
             </div>
           </section>
         </form>

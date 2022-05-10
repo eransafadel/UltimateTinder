@@ -1,0 +1,4 @@
+.chat-direction{
+    display: flex;
+    flex-direction: column;
+}
