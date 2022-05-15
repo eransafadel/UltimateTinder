@@ -183,9 +183,7 @@ const OnBoarding = () => {
               type="url"
               name="url"
               id="url"
-              titlePlaceHolder=""
               onChange={handleChange}
-              setFunc={handleChange}
               required={true}
             />
             <div className="photo-container">
