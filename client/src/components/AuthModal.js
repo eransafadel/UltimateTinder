@@ -43,6 +43,8 @@ const AuthModal = ({ setShowModal, isSignUp }) => {
       navigate('/dashboard');
      } 
 
+     window.location.reload();
+
       
 
 

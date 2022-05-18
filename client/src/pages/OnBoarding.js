@@ -2,8 +2,11 @@ import Nav from "../components/Nav";
 import { useState } from "react";
 import "./OnBoarding.css";
 import {useCookies} from 'react-cookie';
+import {useNavigate} from 'react-router-dom';
+import axios from "axios";
 const OnBoarding = () => {
   const [cookies,setCookie,removeCookies] = useCookies(['user']);
+  let navigate = useNavigate();
   const [formData, setFormData] = useState({
     user_id: cookies.UserId,
     first_name: "",
@@ -31,8 +34,16 @@ const OnBoarding = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = () => {
-    console.log("submit!");
+  const handleSubmit = async(e) => {
+    
+    e.preventDefault();
+    try{
+      const response =await axios.put('http://localhost:8000/user',{formData});
+      const success = response.status ===200;
+      if(success) {
+        navigate('/dashboard');
+      }
+    } catch(err) {console.log(err);}
   };
 
   return (
