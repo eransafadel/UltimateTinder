@@ -46,8 +46,7 @@ useEffect(() => {
     }
 }, [user])
 
-  console.log('user',user);
-  console.log('genderedUsers',genderedUsers);
+  
 
   const matchWithMyId = user?.matches.map(({user_id}) =>user_id).concat(userId)
  const filteredGeneratedUsers = genderedUsers?.filter(
@@ -92,7 +91,7 @@ useEffect(() => {
           {filteredGeneratedUsers?.map((character) => (
             <TinderCard
               className="swipe"
-              key={character.first_name}
+              key={character.user_id}
               onSwipe={(dir) => swiped(dir, character.user_id)}
               onCardLeftScreen={() => outOfFrame(character.first_name)}
             >
